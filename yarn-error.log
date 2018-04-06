@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js run build:prod
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js run build:dev
 
 PATH: 
   C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Go\bin;C:\Program Files\Git\cmd;C:\Program Files (x86)\Skype\Phone\;C:\Program Files\Java\jre1.8.0_121\bin;C:\ProgramData\chocolatey\bin;C:\programming\python\opencv\build\x64\vc14\bin;C:\Program Files (x86)\RemObjects Software\Elements\bin;C:\Program Files (x86)\Pandoc\;C:\Program Files\MiKTeX 2.9\miktex\bin\x64\;C:\Program Files\PuTTY\;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Users\Tomas\Anaconda3;C:\Users\Tomas\Anaconda3\Scripts;C:\Users\Tomas\Anaconda3\Library\bin;C:\Users\Tomas\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Heroku\bin;;C:\Program Files\Docker Toolbox;C:\Users\Tomas\AppData\Roaming\npm;C:\Users\Tomas\AppData\Local\Yarn\bin
@@ -22,11 +22,12 @@ npm manifest:
     "license": "MIT",
     "private": true,
     "scripts": {
-      "serve": "live-server public/",
       "build:dev": "webpack",
       "build:prod": "webpack -p --env production",
       "dev-server": "webpack-dev-server",
-      "test": "jest --config=jest.config.json"
+      "test": "jest --config=jest.config.json",
+      "start": "node server/server.js",
+      "heroku-postbuild": "yarn run build:prod"
     },
     "dependencies": {
       "babel-cli": "^6.26.0",
@@ -37,12 +38,8 @@ npm manifest:
       "babel-preset-env": "^1.6.1",
       "babel-preset-react": "^6.24.1",
       "css-loader": "^0.28.10",
-      "enzyme": "^3.3.0",
-      "enzyme-adapter-react-16": "^1.1.1",
-      "enzyme-to-json": "^3.3.3",
-      "extract-text-webpack-plugin": "^3.0.2",
-      "jest": "^22.4.3",
-      "live-server": "^1.2.0",
+      "express": "^4.16.3",
+      "extract-text-webpack-plugin": "^4.0.0-beta.0",
       "moment": "^2.22.0",
       "node-sass": "^4.7.2",
       "normalize.css": "^8.0.0",
@@ -54,16 +51,22 @@ npm manifest:
       "react-modal": "^3.3.2",
       "react-redux": "^5.0.7",
       "react-router-dom": "^4.2.2",
-      "react-test-renderer": "^16.3.1",
       "react-with-direction": "^1.3.0",
       "redux": "^3.7.2",
       "sass-loader": "^6.0.7",
       "style-loader": "^0.20.3",
       "uuid": "^3.2.1",
       "validator": "^9.4.1",
-      "webpack": "^4.1.1",
-      "webpack-cli": "^2.0.12",
-      "webpack-dev-server": "^3.1.1"
+      "webpack": "^4.1.1"
+    },
+    "devDependencies": {
+      "enzyme": "^3.3.0",
+      "enzyme-adapter-react-16": "^1.1.1",
+      "enzyme-to-json": "^3.3.3",
+      "jest": "^22.4.3",
+      "react-test-renderer": "^16.3.1",
+      "webpack-dev-server": "^3.1.1",
+      "webpack-cli": "^2.0.12"
     }
   }
 
@@ -152,7 +155,7 @@ Lockfile:
       co "^4.6.0"
       json-stable-stringify "^1.0.1"
   
-  ajv@^5.0.0, ajv@^5.1.0:
+  ajv@^5.1.0:
     version "5.5.2"
     resolved "https://registry.yarnpkg.com/ajv/-/ajv-5.5.2.tgz#73b5eeca3fab653e3d3f9422b341ad42205dc965"
     dependencies:
@@ -2794,7 +2797,7 @@ Lockfile:
       jest-message-util "^22.4.3"
       jest-regex-util "^22.4.3"
   
-  express@^4.16.2:
+  express@^4.16.2, express@^4.16.3:
     version "4.16.3"
     resolved "https://registry.yarnpkg.com/express/-/express-4.16.3.tgz#6af8a502350db3246ecc4becf6b5a34d22f7ed53"
     dependencies:
@@ -2873,14 +2876,14 @@ Lockfile:
       snapdragon "^0.8.1"
       to-regex "^3.0.1"
   
-  extract-text-webpack-plugin@^3.0.2:
-    version "3.0.2"
-    resolved "https://registry.yarnpkg.com/extract-text-webpack-plugin/-/extract-text-webpack-plugin-3.0.2.tgz#5f043eaa02f9750a9258b78c0a6e0dc1408fb2f7"
+  extract-text-webpack-plugin@^4.0.0-beta.0:
+    version "4.0.0-beta.0"
+    resolved "https://registry.yarnpkg.com/extract-text-webpack-plugin/-/extract-text-webpack-plugin-4.0.0-beta.0.tgz#f7361d7ff430b42961f8d1321ba8c1757b5d4c42"
     dependencies:
       async "^2.4.1"
       loader-utils "^1.1.0"
-      schema-utils "^0.3.0"
-      webpack-sources "^1.0.1"
+      schema-utils "^0.4.5"
+      webpack-sources "^1.1.0"
   
   extsprintf@1.3.0:
     version "1.3.0"
@@ -7076,12 +7079,6 @@ Lockfile:
     version "1.2.4"
     resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
   
-  schema-utils@^0.3.0:
-    version "0.3.0"
-    resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-0.3.0.tgz#f5877222ce3e931edae039f17eb3716e7137f8cf"
-    dependencies:
-      ajv "^5.0.0"
-  
   schema-utils@^0.4.2, schema-utils@^0.4.5:
     version "0.4.5"
     resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-0.4.5.tgz#21836f0608aac17b78f9e3e24daff14a5ca13a3e"
@@ -8569,7 +8566,7 @@ Trace:
   Error: Command failed.
   Exit code: 1
   Command: C:\WINDOWS\system32\cmd.exe
-  Arguments: /d /s /c webpack -p --env production
+  Arguments: /d /s /c webpack
   Directory: C:\programming\react\udemy\expensify
   Output:
   
