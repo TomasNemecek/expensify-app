@@ -9,10 +9,10 @@ test('Should generate login action object', () => {
     });
 });
 
-type('Should generate logout action object', () => {
-    // const action = logout();
-    // console.log(action);
-    // expect(action).toEqual({
-    //
-    // });
+test('Should generate logout action object', () => {
+    const action = logout();
+    console.log(action);
+    expect(action).toEqual({
+        type: 'LOGOUT'
+    });
 });
